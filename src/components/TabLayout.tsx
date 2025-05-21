@@ -8,7 +8,6 @@ const TabLayout = ({ children }: TabLayoutProps) => {
   return (
     <main>
       {children}
-
       <TabNav />
     </main>
   );

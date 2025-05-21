@@ -13,7 +13,7 @@ const Header = async () => {
 
   return (
     <header
-      className="flex items-center justify-between px-3 py-2"
+      className="flex items-center justify-between px-3 py-2 w-full md:w-[600px] mx-auto"
       style={{
         width: "100%",
         height: 70,
