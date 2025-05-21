@@ -12,8 +12,9 @@ const TabNav = () => {
   const path = usePathname();
 
   return (
-    <div className="fixed bottom-[50px] left-0 z-[999] w-full md:w-[600px] mx-auto">
+    <div className="fixed bottom-[50px] left-0 z-[999] w-full md:max-w-[600px] mx-auto ">
       <div
+        className="w-full md:w-[600px] mx-auto"
         style={{
           width: "100%",
           height: 52,
@@ -29,7 +30,7 @@ const TabNav = () => {
         }}
       >
         <div
-          className="flex items-center justify-between py-1 px-2"
+          className="flex items-center justify-between py-1 px-2 w-full md:w-[600px] mx-auto"
           style={{
             alignSelf: "stretch",
             height: 46.8,
@@ -63,7 +64,7 @@ const TabNav = () => {
           </div>
           <div className="flex-1">
             <Link
-              href="/games"
+              href="/slots"
               className={`flex flex-col items-center justify-center  w-full ${
                 path === "/promotion" ? "text-[#FFBC00]" : "text-[#23FFC8]"
               }`}
