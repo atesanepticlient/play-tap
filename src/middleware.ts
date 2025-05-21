@@ -9,10 +9,19 @@ export default auth(async (req) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isProvider = nextUrl.pathname.startsWith(providerApiPrefix);
+
+  const isApiRoute = nextUrl.pathname.startsWith("/api");
+
   if (session && isAuthRoute && !isProvider) {
     return Response.redirect(new URL("/", nextUrl));
   }
-  if (!session && !isPublicRoute && !isProvider && !isAuthRoute) {
+  if (
+    !session &&
+    !isPublicRoute &&
+    !isProvider &&
+    !isAuthRoute &&
+    !isApiRoute
+  ) {
     const callbackUrl = nextUrl.pathname;
     const encodeCallbackUrl = encodeURIComponent(callbackUrl);
     return Response.redirect(
