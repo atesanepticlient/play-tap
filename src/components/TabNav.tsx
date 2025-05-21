@@ -12,7 +12,7 @@ const TabNav = () => {
   const path = usePathname();
 
   return (
-    <div className="fixed bottom-[50px] left-0 z-[999] w-full md:max-w-[600px] mx-auto ">
+    <div className="fixed bottom-[50px] left-0 z-[999] w-full  ">
       <div
         className="w-full md:w-[600px] mx-auto"
         style={{
