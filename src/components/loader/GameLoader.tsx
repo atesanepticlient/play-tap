@@ -1,0 +1,25 @@
+const GameLoader = ({
+  lenght,
+  loading,
+}: {
+  lenght: number;
+  loading: boolean;
+}) => {
+  const loader = Array.from({ length: lenght });
+
+  if (!loading) return null;
+  return (
+    <>
+      {loader.map((_, i) => (
+        <div
+          className="w-full flex items-center justify-center h-[195px] bg-wwwwwwck-44-4comdaintree rounded-2xl border border-solid border-[#006165]"
+          key={i}
+        >
+          <span className="text-sm text-[#35babe]">Loading...</span>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default GameLoader;
