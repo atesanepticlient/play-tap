@@ -29,6 +29,7 @@ export const sportsData = [
 import GameSelectionHeader from "./GameSelectionHeader";
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const Sports = () => {
   const gamesContainer = useRef<HTMLDivElement | null>(null);
@@ -50,7 +51,7 @@ const Sports = () => {
         title="Sports Games"
         leftAction={handleLeftButtonClick}
         rightAction={handleRightButtonClick}
-        seeAction={() => console.log("This see more button")}
+        seeAction={() => redirect("/sports")}
       />
       <div
         className="max-w-full w-full overflow-x-auto scrollbar-none scroll-smooth"

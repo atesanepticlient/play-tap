@@ -7,6 +7,7 @@ import GameSelectionHeader from "./GameSelectionHeader";
 import { useGames } from "@/lib/store.zustond";
 import { Categories } from "@/types/gamelist";
 import GameLoader from "./loader/GameLoader";
+import { redirect } from "next/navigation";
 
 const SlotGames = () => {
   const gamesContainer = useRef<HTMLDivElement | null>(null);
@@ -32,7 +33,7 @@ const SlotGames = () => {
         title="Slot Games"
         leftAction={handleLeftButtonClick}
         rightAction={handleRightButtonClick}
-        seeAction={() => console.log("This see more button")}
+        seeAction={() => redirect("/slots")}
       />
       <div
         className="max-w-full w-full overflow-x-auto scrollbar-none scroll-smooth"

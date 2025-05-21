@@ -6,6 +6,7 @@ import { GameCardWithProvider } from "./GameCards";
 import GameSelectionHeader from "./GameSelectionHeader";
 // import { useGames } from "@/lib/store.zustond";
 import { Categories } from "@/types/gamelist";
+import { redirect } from "next/navigation";
 
 export const sports = [
   {
@@ -83,7 +84,7 @@ const ESports = () => {
         title="E-Sports"
         leftAction={handleLeftButtonClick}
         rightAction={handleRightButtonClick}
-        seeAction={() => console.log("This see more button")}
+        seeAction={() => redirect("/e-sports")}
       />
       <div
         className="max-w-full w-full overflow-x-auto scrollbar-none scroll-smooth"

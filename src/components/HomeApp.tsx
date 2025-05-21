@@ -7,6 +7,7 @@ import WithdrawDepositButton from "./WithdrawDepositButton";
 import LiveCasino from "./LiveCasino";
 import ESports from "./E-Sports";
 import Sports from "./Sports";
+import Jili from "./Jili";
 
 const HomeApp = () => {
   return (
@@ -16,6 +17,7 @@ const HomeApp = () => {
       <WithdrawDepositButton />
       <AppMenuItems />
       {/* <HotGames /> */}
+      <Jili />
       <SlotGames />
       <ESports />
       <Sports />

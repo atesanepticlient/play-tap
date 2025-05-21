@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -58,7 +57,7 @@ const GameSelectionHeader = ({
               color: "var(--color-orange-50, #FFB800)",
             }}
           >
-            <Link href="/games">See All</Link>
+            <span>See All</span>
           </button>
           <button
             onClick={rightAction}
