@@ -5,7 +5,7 @@ import { GameCardWithProvider } from "./GameCards";
 
 import GameSelectionHeader from "./GameSelectionHeader";
 // import { useGames } from "@/lib/store.zustond";
-import { Categories } from "@/types/gamelist";
+import { Categories, Title } from "@/types/gamelist";
 import { redirect } from "next/navigation";
 
 export const sports = [
@@ -14,7 +14,7 @@ export const sports = [
     name: "CYBER BET MOBILE",
     img: "https://static.cdneu-stat.com/resources/sitepicstbs/imperium_bet/game_img_2/ibcb.jpg",
     device: "1",
-    title: "sport_betting",
+    title: Title.SportBetting,
     categories: Categories.Sport,
     bm: "0",
     demo: "1",
@@ -26,7 +26,7 @@ export const sports = [
     name: "SPORT BET",
     img: "https://static.cdneu-stat.com/resources/sitepicstbs/imperium_bet/game_img_2/ib.jpg",
     device: "0",
-    title: "sport_betting",
+    title: Title.SportBetting,
     categories: Categories.Sport,
     bm: "0",
     demo: "1",
@@ -38,7 +38,7 @@ export const sports = [
     name: "CYBER BET",
     img: "https://static.cdneu-stat.com/resources/sitepicstbs/imperium_bet/game_img_2/ibcb.jpg",
     device: "0",
-    title: "sport_betting",
+    title: Title.SportBetting,
     categories: Categories.Sport,
     bm: "0",
     demo: "1",
@@ -50,7 +50,7 @@ export const sports = [
     name: "SPORT BET MOBILE",
     img: "https://static.cdneu-stat.com/resources/sitepicstbs/imperium_bet/game_img_2/ib.jpg",
     device: "1",
-    title: "sport_betting",
+    title: Title.SportBetting,
     categories: Categories.Sport,
     bm: "0",
     demo: "1",

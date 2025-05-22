@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExtendedCard } from "@/types/api/card";
-import { GamesList, NetEnt } from "@/types/gamelist";
+import { Categories, GamesList, NetEnt } from "@/types/gamelist";
 import { create } from "zustand";
 
 interface WithdrawCardType {
@@ -20,7 +21,8 @@ interface GameType {
   getGames: (
     category: string,
     name?: string,
-    limit?: number
+    limit?: number,
+    provider?: any
   ) => NetEnt[] | null;
 
   setGames: (gamge: GamesList) => void;
@@ -32,15 +34,26 @@ export const useGames = create<GameType>((set, get) => ({
   isLoading: true,
   error: "",
 
-  getGames: (category, name, limit) => {
+  getGames: (category, name, limit, provider) => {
     const games = get().games!;
-    console.log({ games });
+
     if (!games) return null;
     const allGamesArrays = Object.values(games).flat();
 
-    let flitedGames = allGamesArrays.filter(
-      (game) => game.categories === category
-    );
+    let flitedGames = allGamesArrays.filter((game) => {
+      if (category === Categories.Slots) {
+        return (
+          game.categories === category ||
+          game.categories == Categories.FastGames
+        );
+      } else {
+        return game.categories === category;
+      }
+    });
+
+    if (provider && provider !== "all") {
+      flitedGames = allGamesArrays!.filter((game) => game.title === provider);
+    }
 
     if (name) {
       const searchLower = name.toLowerCase();

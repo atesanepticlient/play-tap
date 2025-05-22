@@ -11,15 +11,18 @@ const GameLoader = ({
   return (
     <>
       {loader.map((_, i) => (
-        <div
-          className="w-full flex items-center justify-center h-[195px] bg-wwwwwwck-44-4comdaintree rounded-2xl border border-solid border-[#006165]"
-          key={i}
-        >
-          <span className="text-sm text-[#35babe]">Loading...</span>
-        </div>
+        <Loader key={i} />
       ))}
     </>
   );
 };
 
 export default GameLoader;
+
+export const Loader = () => {
+  return (
+    <div className="w-full flex items-center justify-center h-[195px] bg-wwwwwwck-44-4comdaintree rounded-2xl border border-solid border-[#006165]">
+      <span className="text-sm text-[#35babe]">Loading...</span>
+    </div>
+  );
+};

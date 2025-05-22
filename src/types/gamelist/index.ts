@@ -13,7 +13,7 @@ export interface NetEnt {
   name: string;
   img: string;
   device: string;
-  title: Title | string;
+  title: Title ;
   categories: Categories;
   bm: string;
   demo: string;
@@ -22,6 +22,7 @@ export interface NetEnt {
 }
 
 export enum Categories {
+  FastGames = "fast_games",
   LiveDealers = "live_dealers",
   Slots = "slots",
   Sport = "sport",
@@ -29,6 +30,8 @@ export enum Categories {
 
 export enum Title {
   Evolution = "evolution",
+  FastGames = "fast_games",
+  Jili = "jili",
   Microgaming = "microgaming",
   NetEnt = "NetEnt",
   Pgsoft = "pgsoft",
