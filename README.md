@@ -34,3 +34,42 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+## 🤝 Refer & Earn – Get 300 BDT for You and Your Friend!
+
+### 🎯 How to Participate:
+
+1. **Invite your friends** to register through your **Referral Link** or **Referral Code**.  
+   🔗 You can find your referral info under:  
+   **My Account → Profile → Referral**
+
+2. **Both you and your friend** will receive **300 BDT** automatically within 7 days once the criteria are met.
+
+---
+
+### 💸 Bonus Structure:
+
+| Who         | Bonus     | Required Deposit | Required Turnover |
+|-------------|-----------|------------------|--------------------|
+| Referrer    | 300 BDT   | 2,000 BDT        | 5,000 BDT          |
+| Friend      | 300 BDT   | 1,000 BDT        | 3,000 BDT          |
+
+---
+
+### 📜 Promotion Rules:
+
+- ✅ This promotion is available to **all active BDT players**.
+- 📌 The **referrer** must complete:
+  - A minimum deposit of **2,000 BDT**  
+  - A turnover of **5,000 BDT**
+- 📌 The **referred friend** must:
+  - Register via **your referral link or code**
+  - Make a minimum deposit of **1,000 BDT**
+  - Reach a turnover of **3,000 BDT** within **7 days** of signing up
+- 💰 Bonuses are credited **automatically** within 7 days after requirements are fulfilled.
+
+---
+
+🎉 **Start referring today and earn together!**

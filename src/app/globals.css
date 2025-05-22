@@ -348,3 +348,94 @@
   background: url("../../public/logo-sq.png");
   background-position: center;
 }
+
+
+
+
+.markdown {
+  @apply text-base leading-relaxed text-gray-800;
+}
+
+.markdown h1 {
+  @apply text-2xl font-bold mt-6 mb-3 text-gray-900;
+}
+
+.markdown h2 {
+  @apply text-xl font-semibold mt-5 mb-3 text-gray-900;
+}
+
+.markdown h3 {
+  @apply text-lg font-semibold mt-4 mb-2 text-gray-800;
+}
+
+.markdown p {
+  @apply mb-4;
+}
+
+.markdown ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.markdown ol {
+  @apply list-decimal list-inside mb-4;
+}
+
+.markdown li {
+  @apply mb-2;
+}
+
+.markdown a {
+  @apply text-blue-600 hover:underline;
+}
+
+.markdown code {
+  @apply bg-gray-100 px-1 py-0.5 rounded font-mono text-sm;
+}
+
+.markdown pre {
+  @apply bg-gray-900 text-white p-4 rounded overflow-x-auto mb-4;
+}
+
+.markdown table {
+  @apply w-full border border-gray-300 mb-6;
+  border-collapse: collapse;
+}
+
+.markdown th {
+  @apply bg-gray-100 border border-gray-300 px-3 py-2 text-left text-sm font-medium;
+}
+
+.markdown td {
+  @apply border border-gray-300 px-3 py-2 text-sm;
+}
+
+.markdown blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic text-gray-600 mb-4;
+}
+
+.markdown hr {
+  @apply my-6 border-t border-gray-300;
+}
+.markdown table {
+  @apply w-full table-auto border-collapse border border-gray-300 my-6 text-sm text-left;
+}
+
+.markdown thead {
+  @apply bg-gray-100;
+}
+
+.markdown thead th {
+  @apply px-4 py-2 font-semibold border border-gray-300;
+}
+
+.markdown tbody tr {
+  @apply even:bg-gray-50;
+}
+
+.markdown td {
+  @apply px-4 py-2 border border-gray-300;
+}
+
+.markdown caption {
+  @apply text-gray-600 text-sm text-left caption-top mb-2;
+}

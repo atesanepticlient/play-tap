@@ -10,7 +10,6 @@ import { FaCopy } from "react-icons/fa6";
 import { IoLogOut } from "react-icons/io5";
 import { FaCreditCard } from "react-icons/fa6";
 import { PiHandWithdrawFill } from "react-icons/pi";
-import { FaGift } from "react-icons/fa";
 import { LuHistory } from "react-icons/lu";
 import { FaChartLine } from "react-icons/fa6";
 import { FaFileInvoiceDollar } from "react-icons/fa";
@@ -20,6 +19,8 @@ import { MdSecurity } from "react-icons/md";
 import { TiUserAdd } from "react-icons/ti";
 import { FiDownload } from "react-icons/fi";
 import { MdOutlineSupportAgent } from "react-icons/md";
+import { FaGift } from "react-icons/fa";
+
 import Link from "next/link";
 
 const App: React.FC = () => {
@@ -244,11 +245,14 @@ const App: React.FC = () => {
               Invite Friend
             </span>
           </Link>
-          <Link href="#" className="flex flex-col items-center cursor-pointer">
+          <Link
+            href="/promotion"
+            className="flex flex-col items-center cursor-pointer"
+          >
             <div className="w-12 h-12 rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">
-              <FiDownload className="text-xl text-white" />
+              <FaGift className="text-xl text-white" />
             </div>
-            <span className="text-xs text-center text-white">Download App</span>
+            <span className="text-xs text-center text-white">Promotion</span>
           </Link>
           {/* Row 4 */}
           <Link href="#" className="flex flex-col items-center cursor-pointer">

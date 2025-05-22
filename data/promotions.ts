@@ -1,4 +1,11 @@
 import promotion_1 from "../public/promotion/promotion-1.jpg";
+import promotion_2 from "../public/promotion/promotion-2.jpeg";
+import promotion_3 from "../public/promotion/promotion-3.jpeg";
+import promotion_4 from "../public/promotion/promotion-4.jpeg";
+import promotion_5 from "../public/promotion/promotion-5.jpeg";
+import promotion_6 from "../public/promotion/promotion-6.jpeg";
+import promotion_7 from "../public/promotion/promotion-7.jpeg";
+import promotion_8 from "../public/promotion/promotion-8.jpeg";
 
 export const promotions = [
   {
@@ -43,7 +50,7 @@ Receive your bonus after the deposit has been processed.
   {
     id: 1001,
     context: "Top-Up Reward ",
-    image: promotion_1,
+    image: promotion_2,
     title: "Get 3% Instant Bonus on Every Deposit",
     description: "Get 3% Instant Bonus on Every Deposit",
     content: `## 🎁 Claim Your Bonus in 3 Easy Steps
@@ -78,7 +85,7 @@ Receive your bonus after the deposit has been processed.
   {
     id: 1002,
     context: "Welcome Bonus 200 BDT ",
-    image: promotion_1,
+    image: promotion_3,
     title: "Welcome Bonus 200 BDT in All Products",
     description:
       "Get your lucky start with a 100% bonus on ALL products worth up to 200 BDT for your first deposit!",
@@ -119,7 +126,7 @@ Receive the bonus after the deposit has been processed.
   {
     id: 1003,
     context: "Welcome Offer ",
-    image: promotion_1,
+    image: promotion_4,
     title: "Slots 300% Welcome Bonus 8,000 BDT",
     description:
       "Get your lucky start with a 300% Slots bonus worth up to 8,000 BDT for your first deposit!",
@@ -156,7 +163,7 @@ Receive the bonus after the deposit has been processed.
   {
     id: 1004,
     context: "Weekly Reload Bonus",
-    image: promotion_1,
+    image: promotion_5,
     title: "Weekly Reload Bonus up to 1100%",
     description:
       "Boost your game play and wing big! Claim this bonus up to 8 times with total of 1100% every week!",
@@ -214,7 +221,7 @@ You can claim the bonus **up to 8 times per week** with the following percentage
   {
     id: 1005,
     context: "Slots Games 25% Daily",
-    image: promotion_1,
+    image: promotion_6,
     title: "Slots Games 25% Daily Reload Bonus 5,000 BDT",
     description:
       "Deposit everyday and hit an additional 25% Slots Reload bonus up to 5,000 BDT.",
@@ -253,7 +260,7 @@ Receive your bonus after the deposit is successfully processed.
   {
     id: 1006,
     context: "Slots Games 12% ",
-    image: promotion_1,
+    image: promotion_7,
     title: "Slots Games 12% Weekly Cashback",
     description:
       "Spin your favorite Slots games and worry-free. Get the generous UNLIMITED cashback!",
@@ -295,7 +302,7 @@ Receive your bonus after the deposit is successfully processed.
   {
     id: 1007,
     context: "Refer your Friend ",
-    image: promotion_1,
+    image: promotion_8,
     title: "Refer your Friend and Earn 600 BDT for both of you",
     description:
       "Earn rewards by inviting your friends to join Banglaslots! Sign up now and receive a 1000 BDT Free Bet for both you and your friend!",

@@ -1,5 +1,5 @@
 import AuthBarBottom from "@/components/AuthBarBottom";
-import { Header } from "@radix-ui/react-accordion";
+import Header from "@/components/Header";
 import React from "react";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
