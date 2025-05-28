@@ -99,10 +99,7 @@ const Footer = () => {
         </div>
 
         <p className="absolute w-[266px] text-white h-10 top-[218px] left-[100px] text-xs  font-[number:var(--www-wwwck444-com-segoe-UI-regular-font-weight)]  text-[length:var(--www-wwwck444-com-segoe-UI-regular-font-size)] tracking-[var(--www-wwwck444-com-segoe-UI-regular-letter-spacing)] leading-[var(--www-wwwck444-com-segoe-UI-regular-line-height)] [font-style:var(--www-wwwck444-com-segoe-UI-regular-font-style)]">
-          xplaytab.COM website is operated by company, under license number
-          GLH-OCCHKTW07080120 issued to it and regulated by Gaming Services
-          Provider N.V., authorized by the Government of Curaçao under license
-          number 365JAZ.
+          xplaytap.COM website is operated by company, Curaçao Gaming Services
         </p>
 
         <div className="absolute w-[26px] h-[26px] top-[320px] left-[100px] bg-[url(https://c.animaapp.com/m9cwtgo4xBXHVx/img/facebook.png)] bg-cover bg-[50%_50%]" />
