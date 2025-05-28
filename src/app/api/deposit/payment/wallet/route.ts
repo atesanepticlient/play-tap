@@ -4,17 +4,20 @@ import { db } from "@/lib/db";
 
 export const GET = async () => {
   try {
-    const wallets: any = await db.depositWallet.findMany({
+    const depostiWallets = await db.depositWallet.findMany({
       where: { isActive: true },
     });
 
-    wallets.map(async (w: any) => {
-      const paymentWallet = await db.paymentWallet.findUnique({
-        where: { id: w.paymentWalletId },
-      });
-      w.paymentWallet = paymentWallet;
-      return w;
+    const paymentWallets = await db.paymentWallet.findMany({ where: {} });
+
+    const wallets = depostiWallets.map((w) => {
+      const paymentWallet = paymentWallets.find(
+        (pw) => pw.id == w.paymentWalletId
+      );
+      return { ...w, paymentWallet };
     });
+
+    console.log("wallets from server = ", wallets);
 
     const bonus = await db.bonus.findFirst({ where: {} });
 

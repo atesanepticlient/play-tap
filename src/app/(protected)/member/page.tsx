@@ -22,15 +22,19 @@ import { MdOutlineSupportAgent } from "react-icons/md";
 import { FaGift } from "react-icons/fa";
 
 import Link from "next/link";
+import useCurrentUser from "@/hook/useCurrentUser";
+import { logout } from "@/action/logout";
 
 const App: React.FC = () => {
-  const [balance, setBalance] = useState(1250.75);
+  const user = useCurrentUser();
+
+  const [balance, setBalance] = useState(+user!.wallet!.balance);
   const [copied, setCopied] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [lastUpdateTime, setLastUpdateTime] = useState(new Date());
   const handleCopyPlayerId = () => {
-    navigator.clipboard.writeText("BT78945612");
+    navigator.clipboard.writeText(user!.playerId);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -52,6 +56,16 @@ const App: React.FC = () => {
     setLastUpdateTime(new Date());
     setShowToast(true);
     setIsRefreshing(false);
+  };
+
+  const handleLogout = () => {
+    logout().then((res) => {
+      if (res.success) {
+        location.reload();
+      } else if (res.error) {
+        console.log(res.error);
+      }
+    });
   };
 
   useEffect(() => {
@@ -87,10 +101,10 @@ const App: React.FC = () => {
           <div className="flex items-center">
             <UserAvatar imageUrl="https://images.51939393.com//TCG_PROD_IMAGES/B2C/01_PROFILE/PROFILE/0.png" />
             <div className="ml-3">
-              <h2 className="font-medium text-lg">James Wilson</h2>
+              <h2 className="font-medium text-lg">Pro Gamer</h2>
               <div className="flex items-center mt-1">
                 <span className="text-sm text-gray-200">
-                  Player ID: BT78945612
+                  Player ID: {user!.playerId}
                 </span>
                 <button
                   onClick={handleCopyPlayerId}
@@ -101,7 +115,10 @@ const App: React.FC = () => {
               </div>
             </div>
           </div>
-          <button className="text-white p-2 rounded-full hover:bg-[#00292f] cursor-pointer">
+          <button
+            onClick={() => handleLogout()}
+            className="text-white p-2 rounded-full hover:bg-[#00292f] cursor-pointer"
+          >
             <IoLogOut className="w-5 h-5" />
           </button>
         </div>
@@ -155,7 +172,7 @@ const App: React.FC = () => {
         </Link>
         <Link href="/my-cards">
           <button className="font-bold text-center  text-orange-700 bg-teal-900 rounded-3xl border border-solid bg-[linear-gradient(rgb(255,230,0),rgb(255,184,0))] border-orange-200 border-opacity-50  leading-[50px] w-full shadow-[rgb(255,242,166)_0px_3.64267px_0px_1px_inset,rgb(182,65,0)_0px_3.64267px_0px_0px] flex  justify-center items-center gap-3 h-[60px] ">
-            <FaCreditCard className="text-xl mb-1 w-7 h-7" />
+            <FaCreditCard className="text-xl mb-1 w-5 h-5" />
             <span className="text-lg font-medium">My Card</span>
           </button>
         </Link>
@@ -187,7 +204,7 @@ const App: React.FC = () => {
             </span>
           </Link>
           <Link
-            href="/profit-loss"
+            href="/winning-rate"
             className="flex flex-col items-center cursor-pointer"
           >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">
@@ -209,7 +226,7 @@ const App: React.FC = () => {
           </Link>
 
           <Link
-            href={"withdraw-record"}
+            href={"/withdraw-record"}
             className="flex flex-col items-center cursor-pointer"
           >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center mb-1 shadow-sm">
@@ -219,21 +236,24 @@ const App: React.FC = () => {
               Withdraw Record
             </span>
           </Link>
-          <Link href="#" className="flex flex-col items-center cursor-pointer">
+          <Link
+            href="/member"
+            className="flex flex-col items-center cursor-pointer"
+          >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">
               <FaCircleUser className="text-xl text-white" />
             </div>
             <span className="text-xs text-center text-white">My Account</span>
           </Link>
           {/* Row 3 */}
-          <Link href="#" className="flex flex-col items-center cursor-pointer">
+          {/* <Link href="#" className="flex flex-col items-center cursor-pointer">
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">
               <MdSecurity className="text-xl text-white" />
             </div>
             <span className="text-xs text-center text-white">
               Security Center
             </span>
-          </Link>
+          </Link> */}
           <Link
             href="/invite-friends"
             className="flex flex-col items-center cursor-pointer"
@@ -255,7 +275,10 @@ const App: React.FC = () => {
             <span className="text-xs text-center text-white">Promotion</span>
           </Link>
           {/* Row 4 */}
-          <Link href="#" className="flex flex-col items-center cursor-pointer">
+          <Link
+            href="/support"
+            className="flex flex-col items-center cursor-pointer"
+          >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border border-x-teal-600 flex items-center justify-center  shadow-sm">
               <MdOutlineSupportAgent className="text-xl text-white" />
             </div>

@@ -45,12 +45,12 @@ const menuData = [
   {
     title: "Favorites",
     icon: fav,
-    redirect: "#",
+    redirect: "/favorites",
   },
   {
     title: "Promotion",
     icon: promotion,
-    redirect: "/promotions",
+    redirect: "/promotion",
   },
 ];
 

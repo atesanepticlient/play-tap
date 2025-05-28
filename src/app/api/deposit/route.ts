@@ -6,7 +6,6 @@ import { MakeDepositRequestInput } from "@/types/api/deposit";
 import { NextRequest } from "next/server";
 
 import { Decimal } from "@prisma/client/runtime/library";
-import { PaymentWallet } from "@/data/paymentWallet";
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -18,12 +17,22 @@ export const POST = async (req: NextRequest) => {
 
     const { amount, bonus, bonusFor, senderNumber, walletId } =
       (await req.json()) as MakeDepositRequestInput;
-    console.log({ senderNumber });
     const wallet = await db.depositWallet.findUnique({
       where: { id: walletId },
     });
 
     if (!wallet) {
+      return Response.json(
+        { error: "Unsuppoted wallet selected" },
+        { status: 400 }
+      );
+    }
+
+    const paymentWallet = await db.paymentWallet.findUnique({
+      where: { id: wallet.paymentWalletId },
+    });
+
+    if (!paymentWallet) {
       return Response.json(
         { error: "Unsuppoted wallet selected" },
         { status: 400 }
@@ -92,14 +101,10 @@ export const POST = async (req: NextRequest) => {
       },
     });
 
-    const paymentWalletInfo = JSON.parse(
-      wallet.paymentWalletId!.toString()
-    ) as PaymentWallet;
-
     const paymentCallback = `${process.env.PAYCALLBACK_URL}/${
-      paymentWalletInfo.walletName == "Bkash"
+      paymentWallet.walletName.toLowerCase() == "bkash"
         ? "bkash"
-        : paymentWalletInfo.walletName == "Nagad"
+        : paymentWallet.walletName.toLowerCase() == "nagad"
         ? "nagad"
         : ""
     }?trackingNumber=${trackingNumber}`;
@@ -108,7 +113,8 @@ export const POST = async (req: NextRequest) => {
       { success: true, payload: { trackingNumber, paymentCallback } },
       { status: 201 }
     );
-  } catch {
+  } catch (error) {
+    console.log("Create deposti ", error);
     return Response.json({ error: INTERNAL_SERVER_ERROR }, { status: 500 });
   }
 };

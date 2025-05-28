@@ -14,7 +14,6 @@ import { MdOutlineSupportAgent } from "react-icons/md";
 
 const Header = async () => {
   const user = await findCurrentUser();
-
   return (
     <header
       className="flex items-center justify-between px-3 py-2 w-full md:w-[600px] mx-auto"
@@ -53,15 +52,14 @@ const Header = async () => {
         </div>
         <Image
           style={{
-            width: 89.98,
-            height: 28.08,
+            width: 120,
           }}
           src={logo}
           alt="logo"
         />
       </div>
 
-      {user && <HeaderBalance />}
+      {user && <HeaderBalance balance={+user!.wallet!.balance} />}
       {!user && (
         <div className="flex items-center  gap-2">
           <Link href="/support">

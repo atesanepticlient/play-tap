@@ -8,7 +8,7 @@ declare global {
     };
     chatwootSDK: {
       run: (settings: { websiteToken: string; baseUrl: string }) => void;
-      // add other methods or properties of chatwootSDK here if you want
+      
     };
   }
 }
@@ -22,7 +22,7 @@ const ChatProvider = () => {
 
     script.onload = () => {
       window.chatwootSettings = {
-        websiteToken: "vYbUD5FCDNPsQJEYgX6BBDpp",
+        websiteToken: "9wGsZPPxiPCf8eTdxQPuiqDW",
         baseUrl: BASE_URL,
       };
 

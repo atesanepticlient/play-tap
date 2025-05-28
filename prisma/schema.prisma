@@ -98,7 +98,7 @@ model DepositWallet {
   minDeposit              Decimal
   maximumDeposit          Decimal
   isActive                Boolean @default(true)
-  deposits                Deposit[]
+  deposits                Deposit[] @relation("WalletDeposits")
 }
 
 enum DepositStatus {
@@ -118,7 +118,7 @@ model Deposit {
   trackingNumber          String @unique
   expire                  DateTime
   status                  DepositStatus @default(PENDING)
-  wallet                  DepositWallet @relation(fields: [walletId], references: [id])
+  wallet                  DepositWallet  @relation("WalletDeposits", fields: [walletId], references: [id], onDelete: Cascade)
   userId                  String
   user                    User @relation(fields: [userId],references: [id])
   createdAt               DateTime @default(now())

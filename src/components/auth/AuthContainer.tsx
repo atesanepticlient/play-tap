@@ -24,7 +24,7 @@ const AuthContaner = ({
   return (
     <div className="bg-[url(https://c.animaapp.com/m9drzmnaxdV67z/img/background.png)] bg-cover bg-[50%_50%] w-full h-screen ">
       <div className="flex justify-center py-5 pt-12">
-        <Image src={logo} alt="ck444" className="w-[100px] h-auto" />
+        <Image src={logo} alt="ck444" className="w-[120px] h-auto" />
       </div>
 
       <div className="flex flex-col items-center mb-2">

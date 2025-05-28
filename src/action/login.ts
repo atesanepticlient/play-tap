@@ -12,7 +12,8 @@ export const login = async (data: zod.infer<typeof loginSchema>) => {
 
     return { success: LOGIN_SUCCESS };
   } catch (error) {
+    console.log({ error });
     const credentialsError = error as CredentialsSignin;
-    return { error: credentialsError.message };
+    return { error: credentialsError?.cause?.err?.message };
   }
 };

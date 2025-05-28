@@ -26,6 +26,7 @@ import { ExtendedWallet } from "@/types/api/deposit";
 const App: React.FC = () => {
   const { data, isLoading } = useGetDepositPaymentDataQuery();
   const wallets = data?.wallets;
+  console.log("wallets ", wallets);
   const bonus = data?.bonus;
   const user = useGetCurrentUser();
 
@@ -234,7 +235,7 @@ const App: React.FC = () => {
                   </div>
                 </div>
 
-                {wallets?.map((pw,i) => (
+                {wallets?.map((pw, i) => (
                   <PaymentMethod
                     key={i}
                     method={pw}

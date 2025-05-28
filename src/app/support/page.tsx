@@ -31,9 +31,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useCurrentUser from "@/hook/useCurrentUser";
 
 const App: React.FC = () => {
-  const [playerID, setPlayerID] = useState("PLAYER123456789");
+  const user = useCurrentUser();
+
+  const [playerID, setPlayerID] = useState(user!.playerId);
   const [isCopied, setIsCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [message, setMessage] = useState("");

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import logo from "@/../public/logo-sq.png";
+import logo from "@/../public/logo-sq.jpeg";
 import Image from "next/image";
 
 const Footer = () => {
@@ -13,13 +13,19 @@ const Footer = () => {
           className="absolute w-[164px] h-[52px] top-[23px] left-[23px] rounded-[14.56px] border border-solid border-[#11867d80] shadow-[0px_2.08px_0px_#003941] [background:linear-gradient(180deg,rgba(15,114,124,1)_0%,rgba(0,78,86,1)_100%)]"
         >
           <div className="relative w-[119px] h-[26px] top-3 left-[23px]">
-            <div className="[text-shadow:0px_3.12px_0px_#b64100] text-3xl font-bold text-wwwwwwck444comselective-yellow absolute w-[119px] h-[26px] top-0 left-0 font-www-wwwck444-com-segoe-UI-bold-upper  text-[length:var(--www-wwwck444-com-segoe-UI-bold-upper-font-size)] text-center tracking-[var(--www-wwwck444-com-segoe-UI-bold-upper-letter-spacing)] leading-[var(--www-wwwck444-com-segoe-UI-bold-upper-line-height)] whitespace-nowrap [font-style:var(--www-wwwck444-com-segoe-UI-bold-upper-font-style)]">
+            <Link
+              href="/support"
+              className="[text-shadow:0px_3.12px_0px_#b64100] text-3xl font-bold text-wwwwwwck444comselective-yellow absolute w-[119px] h-[26px] top-0 left-0 font-www-wwwck444-com-segoe-UI-bold-upper  text-[length:var(--www-wwwck444-com-segoe-UI-bold-upper-font-size)] text-center tracking-[var(--www-wwwck444-com-segoe-UI-bold-upper-letter-spacing)] leading-[var(--www-wwwck444-com-segoe-UI-bold-upper-line-height)] whitespace-nowrap [font-style:var(--www-wwwck444-com-segoe-UI-bold-upper-font-style)]"
+            >
               PARTNER
-            </div>
+            </Link>
 
-            <div className="[background:linear-gradient(180deg,rgba(255,184,0,1)_25%,rgba(255,230,0,1)_40%,rgba(255,184,0,1)_54%,rgba(255,230,0,1)_69%,rgba(255,184,0,1)_83%)] [-webkit-background-clip:text] !bg-clip-text text-transparent [-webkit-text-fill-color:transparent] [text-fill-color:transparent]  absolute w-[119px] h-[26px] top-0 left-0 font-www-wwwck444-com-segoe-UI-bold-upper font-bold text-[length:var(--www-wwwck444-com-segoe-UI-bold-upper-font-size)] text-center tracking-[var(--www-wwwck444-com-segoe-UI-bold-upper-letter-spacing)] leading-[var(--www-wwwck444-com-segoe-UI-bold-upper-line-height)] whitespace-nowrap [font-style:var(--www-wwwck444-com-segoe-UI-bold-upper-font-style)] text-3xl ">
+            <Link
+              href="/support"
+              className="[background:linear-gradient(180deg,rgba(255,184,0,1)_25%,rgba(255,230,0,1)_40%,rgba(255,184,0,1)_54%,rgba(255,230,0,1)_69%,rgba(255,184,0,1)_83%)] [-webkit-background-clip:text] !bg-clip-text text-transparent [-webkit-text-fill-color:transparent] [text-fill-color:transparent]  absolute w-[119px] h-[26px] top-0 left-0 font-www-wwwck444-com-segoe-UI-bold-upper font-bold text-[length:var(--www-wwwck444-com-segoe-UI-bold-upper-font-size)] text-center tracking-[var(--www-wwwck444-com-segoe-UI-bold-upper-letter-spacing)] leading-[var(--www-wwwck444-com-segoe-UI-bold-upper-line-height)] whitespace-nowrap [font-style:var(--www-wwwck444-com-segoe-UI-bold-upper-font-style)] text-3xl "
+            >
               PARTNER
-            </div>
+            </Link>
           </div>
         </Link>
 
@@ -153,8 +159,68 @@ const Footer = () => {
 
         <div className="absolute w-[47px] h-[23px] top-[497px] left-[309px] bg-[url(https://c.animaapp.com/m9cwtgo4xBXHVx/img/rt-color-png.png)] bg-cover bg-[50%_50%]" />
       </div>
+      <PaymentMethodList />
     </div>
   );
 };
 
 export default Footer;
+const PaymentMethodList: React.FC = () => {
+  const paymentMethods = [
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/891014a5f7532be51efebb6fcf6cb6c2ae7e9635?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[2.62]",
+      width: "w-[42px]",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/4fd6446247a558c750cc70cea440ada1dbdfbede?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[2.19]",
+      width: "w-[35px]",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/8721703dd362c81d96a0067e96bd4bcb6f5b162e?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[1.44]",
+      width: "w-[23px]",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/f7acce723d0fb8c14da217bb4e307fb18b473cf3?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[2.19]",
+      width: "w-[35px]",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/c32c4eef10d26c3d1160a7c8db46837c7d95549e?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[2.81]",
+      width: "w-[45px]",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/0351554e2c837b12859628ea21fa7e4efe666ed3?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[2.62]",
+      width: "w-[42px]",
+    },
+    {
+      url: "https://cdn.builder.io/api/v1/image/assets/54833f07f02243a4bce6c5e3c64e306d/f0881a2113e0820f323a32a7519c665fa8cbe192?placeholderIfAbsent=true",
+      aspectRatio: "aspect-[3.31]",
+      width: "w-[53px]",
+    },
+  ];
+
+  return (
+    <section className="gap-4 pl-8 mt-[550px]">
+      <h2 className="w-full text-sm font-bold leading-none text-white">
+        Payment Methods
+      </h2>
+      <div className="flex flex-col pr-7 pb-3.5 mt-4 w-full max-w-[369px] max-md:pr-5">
+        <div className="flex gap-2.5">
+          {paymentMethods.map((method, index) => (
+            <img
+              key={index}
+              src={method.url}
+              alt={`Payment method ${index + 1}`}
+              className={`object-contain shrink-0 opacity-70 ${method.aspectRatio} ${method.width}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

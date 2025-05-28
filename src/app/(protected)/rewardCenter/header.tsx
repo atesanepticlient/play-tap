@@ -7,15 +7,18 @@ import { FiRefreshCw } from "react-icons/fi";
 import { IoLogOut } from "react-icons/io5";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import useCurrentUser from "@/hook/useCurrentUser";
 
 const RewardHeader = () => {
+  const user = useCurrentUser();
+
   const [copied, setCopied] = useState(false);
-  const [balance, setBalance] = useState(1250.75);
+  const [balance, setBalance] = useState(+user!.wallet!.balance);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [lastUpdateTime, setLastUpdateTime] = useState(new Date());
   const handleCopyPlayerId = () => {
-    navigator.clipboard.writeText("BT78945612");
+    navigator.clipboard.writeText(user!.playerId);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -89,10 +92,10 @@ const RewardHeader = () => {
             />
           </div>
           <div className="ml-3 absolute left-[40%] -bottom-4 -translate-y-1/2">
-            <h2 className="font-bold text-xl text-white">James Wilson</h2>
+            <h2 className="font-bold text-xl text-white">Pro Gamer</h2>
             <div className="flex items-center mt-1">
               <span className="text-sm text-gray-200">
-                Player ID: BT78945612
+                Player ID: {user!.playerId}
               </span>
               <button
                 onClick={handleCopyPlayerId}

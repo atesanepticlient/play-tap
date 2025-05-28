@@ -1,26 +1,26 @@
 import Link from "next/link";
 import React from "react";
 
-import hotGame from "@/../public/icons/nav-hotgames.svg";
+// import hotGame from "@/../public/icons/nav-hotgames.svg";
 import slot from "@/../public/icons/nav-slot.svg";
 import sport from "@/../public/icons/nav-sport.svg";
 import live from "@/../public/icons/nav-live.svg";
-import lottery from "@/../public/icons/nav-lottery.svg";
+// import lottery from "@/../public/icons/nav-lottery.svg";
 import esports from "@/../public/icons/nav-esport.svg";
 import fav from "@/../public/icons/nav-fav.svg";
 import Image from "next/image";
 
 const menuData = [
-  {
-    title: "Hot Games",
-    icon: hotGame,
-    link: "#",
-  },
+  // {
+  //   title: "Hot Games",
+  //   icon: hotGame,
+  //   link: "",
+  // },
 
   {
     title: "Slots",
     icon: slot,
-    link: "/slot",
+    link: "/slots",
   },
   {
     title: "Live",
@@ -40,14 +40,14 @@ const menuData = [
   {
     title: "Favorites",
     icon: fav,
-    link: "#",
+    link: "/favorites",
   },
 
-  {
-    title: "Lottery",
-    icon: lottery,
-    link: "#",
-  },
+  // {
+  //   title: "Lottery",
+  //   icon: lottery,
+  //   link: "#",
+  // },
 
   // {
   //   title: "PVP",
