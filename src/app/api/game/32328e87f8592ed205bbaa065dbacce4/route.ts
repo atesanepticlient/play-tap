@@ -133,7 +133,6 @@ export const POST = async (req: NextRequest) => {
       });
     }
   } catch (error: any) {
-    console.log("ERROR WRITE bet", error);
     return Response.json(
       { success: "fail", error: error.message || "unexpected_error" },
       { status: 500 }

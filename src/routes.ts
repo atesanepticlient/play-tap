@@ -23,6 +23,7 @@ export const publicRoutes = [
   "/promotion/1005",
   "/promotion/1006",
   "/promotion/1007",
+  "/api/game/32328e87f8592ed205bbaa065dbacce4",
 ];
 
 /**
