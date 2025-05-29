@@ -106,8 +106,8 @@ export const POST = async (req: NextRequest) => {
 
     if (requestBody.cmd === "writeBet") {
       if (requestBody.bet && requestBody.bet > userBalance) {
-        return new Response(
-          JSON.stringify({ success: "fail", error: "fail_balance" }),
+        return Response.json(
+          { success: "fail", error: "fail_balance" },
           { status: 403 }
         );
       }
