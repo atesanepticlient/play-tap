@@ -201,13 +201,13 @@ const App: React.FC = () => {
 
           <SiteHeader title="Deposit">
             <Link
-              href="#"
+              href="/support"
               className="text-gray-700 hover:text-gray-900 cursor-pointer"
             >
               <MdOutlineSupportAgent className="text-lg" />
             </Link>
             <Link
-              href="#"
+              href="/deposit-record"
               className="text-gray-700 hover:text-gray-900 cursor-pointer"
             >
               <MdHistory className="text-lg" />
