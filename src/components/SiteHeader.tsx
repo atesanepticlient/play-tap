@@ -15,7 +15,7 @@ const SiteHeader = ({
   return (
     <header className="bg-white shadow-md py-4 px-6 flex items-center justify-between sticky top-0 z-10">
       <button
-        onClick={() => router.back()}
+        onClick={() => router.push("/")}
         className="text-gray-700 hover:text-gray-900 cursor-pointer"
       >
         <FaArrowLeftLong className="text-lg" />
