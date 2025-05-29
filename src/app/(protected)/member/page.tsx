@@ -101,7 +101,9 @@ const App: React.FC = () => {
           <div className="flex items-center">
             <UserAvatar imageUrl="https://images.51939393.com//TCG_PROD_IMAGES/B2C/01_PROFILE/PROFILE/0.png" />
             <div className="ml-3">
-              <h2 className="font-medium text-lg">Pro Gamer</h2>
+              <h2 className="font-medium text-lg">
+                {user?.name || "Pro Gamer"}
+              </h2>
               <div className="flex items-center mt-1">
                 <span className="text-sm text-gray-200">
                   Player ID: {user!.playerId}
@@ -134,7 +136,7 @@ const App: React.FC = () => {
                     : "balancePulse 0.5s ease-out",
                 }}
               >
-                ${balance.toFixed(2)}
+                ৳{balance.toFixed(2)}
               </span>
               <style>
                 {`
@@ -237,7 +239,7 @@ const App: React.FC = () => {
             </span>
           </Link>
           <Link
-            href="/member"
+            href="/my-account"
             className="flex flex-col items-center cursor-pointer"
           >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">
@@ -246,14 +248,17 @@ const App: React.FC = () => {
             <span className="text-xs text-center text-white">My Account</span>
           </Link>
           {/* Row 3 */}
-          {/* <Link href="#" className="flex flex-col items-center cursor-pointer">
+          <Link
+            href="/security"
+            className="flex flex-col items-center cursor-pointer"
+          >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">
               <MdSecurity className="text-xl text-white" />
             </div>
             <span className="text-xs text-center text-white">
               Security Center
             </span>
-          </Link> */}
+          </Link>
           <Link
             href="/invite-friends"
             className="flex flex-col items-center cursor-pointer"

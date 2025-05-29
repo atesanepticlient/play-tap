@@ -101,13 +101,9 @@ export const POST = async (req: NextRequest) => {
       },
     });
 
-    const paymentCallback = `${process.env.PAYCALLBACK_URL}/${
-      paymentWallet.walletName.toLowerCase() == "bkash"
-        ? "bkash"
-        : paymentWallet.walletName.toLowerCase() == "nagad"
-        ? "nagad"
-        : ""
-    }?trackingNumber=${trackingNumber}`;
+    const paymentCallback = `${
+      process.env.PAYCALLBACK_URL
+    }/${paymentWallet.walletName.toLowerCase()}?trackingNumber=${trackingNumber}`;
 
     return Response.json(
       { success: true, payload: { trackingNumber, paymentCallback } },

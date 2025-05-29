@@ -5,10 +5,10 @@ const paymentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchWallets: builder.query<
       { paymentWallets: Prisma.PaymentWalletGetPayload<object>[] },
-      void
+      { access?: string }
     >({
-      query: () => ({
-        url: "api/payment-wallets",
+      query: ({ access }) => ({
+        url: `api/payment-wallets?access=${access ? access : ""}`,
         method: "GET",
       }),
     }),

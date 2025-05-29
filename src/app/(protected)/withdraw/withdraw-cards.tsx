@@ -15,6 +15,7 @@ import { ExtendedCard } from "@/types/api/card";
 import BkashCard from "@/components/cards/BkashCard";
 import NagadCard from "@/components/cards/NagadCard";
 import { useCard } from "@/lib/store.zustond";
+import MyCardsSkleton from "@/components/skelton/MyCardsSkleton";
 
 const WithdrawCards = ({ cards }: { cards: ExtendedCard[] }) => {
   const swiperRef = useRef<any>(null);
@@ -30,45 +31,49 @@ const WithdrawCards = ({ cards }: { cards: ExtendedCard[] }) => {
 
   return (
     <div className="">
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 200,
-          modifier: 1,
-        }}
-        modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-          setActiveCard(cards[swiper.activeIndex]); // initial active
-        }}
-        onSlideChange={(swiper) => {
-          setActiveCard(cards[swiper.activeIndex]); // update on slide change
-        }}
-      >
-        {cards.map((card, i) => (
-          <SwiperSlide key={i} className="max-w-max  ">
-            {card.paymentWallet.walletName.toLowerCase() == "bkash" ? (
-              <BkashCard
-                bkashNumber={card.walletNumber}
-                cardNumber={card.cardNumber}
-                ownerName={card.container.ownerName}
-              />
-            ) : (
-              <NagadCard
-                nagadNumber={card.walletNumber}
-                cardNumber={card.cardNumber}
-                ownerName={card.container.ownerName}
-              />
-            )}
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {cards.length > 0 && (
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 200,
+            modifier: 1,
+          }}
+          modules={[EffectCoverflow, Pagination]}
+          className="mySwiper"
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            setActiveCard(cards[swiper.activeIndex]); // initial active
+          }}
+          onSlideChange={(swiper) => {
+            setActiveCard(cards[swiper.activeIndex]); // update on slide change
+          }}
+        >
+          {cards.map((card, i) => (
+            <SwiperSlide key={i} className="max-w-max  ">
+              {card.paymentWallet.walletName.toLowerCase() == "bkash" ? (
+                <BkashCard
+                  bkashNumber={card.walletNumber}
+                  cardNumber={card.cardNumber}
+                  ownerName={card.container.ownerName}
+                />
+              ) : (
+                <NagadCard
+                  nagadNumber={card.walletNumber}
+                  cardNumber={card.cardNumber}
+                  ownerName={card.container.ownerName}
+                />
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+
+      {cards.length < 0 && <MyCardsSkleton />}
     </div>
   );
 };

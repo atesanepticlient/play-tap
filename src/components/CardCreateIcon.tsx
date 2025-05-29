@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useFetchWalletsQuery } from "@/lib/features/paymentApiSlice";
 
 const CardCreateIcon = () => {
-  const { data, isLoading } = useFetchWalletsQuery();
+  const { data, isLoading } = useFetchWalletsQuery({ access: "card" });
   const wallets = data?.paymentWallets;
 
   return (

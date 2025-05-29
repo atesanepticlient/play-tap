@@ -21,6 +21,8 @@ model User{
   phone             String @unique
   password          String
   playerId          String @unique
+  name              String? @default("Pro User")
+  facebook          String?
   isBanned          Boolean
   referId           String @unique
   wallet            Wallet?
@@ -81,11 +83,18 @@ model Bonus {
   referralBonus           Int @default(5)
 }
 
-
+enum PaymentWalletType {
+  EWALLET
+  BANK
+  CARD
+  CRYPTO
+}
 model PaymentWallet {
   id                      String @id @default(cuid())
   walletLogo              String
   walletName              String
+  walletType              PaymentWalletType @default(EWALLET)
+
 }
 
 model DepositWallet {
@@ -145,7 +154,6 @@ model Card{
   isActive                Boolean @default(true)
   container               CardContainer @relation(fields: [containerId], references: [id])
   createdAt               DateTime @default(now())
-
   withdraws               Withdraw[] 
 }
 
@@ -158,6 +166,7 @@ model Withdraw {
   id                      String @id @default(cuid()) 
   amount                  Decimal
   expire                  DateTime
+  status                  WithdrawStatus @default(PENDING)  
   createdAt               DateTime @default(now())
   cardId                  String
   card                    Card @relation(fields: [cardId], references: [id])
@@ -165,4 +174,23 @@ model Withdraw {
   user                    User @relation(fields: [userId], references: [id])
 }
 
+enum ManagementRole {
+  ADMIN 
+  SUBADMIN
+}
+model Admin {
+  id                      String @id @default(cuid()) 
+  name                    String
+  role                    ManagementRole @default(ADMIN)
+  email                   String @unique
+  password                String
+   
 
+}
+
+model EmailVerificationToken {
+  id                      String @id @default(cuid()) 
+  expire                  DateTime
+  token                   String
+  createdAt               DateTime @default(now())
+}

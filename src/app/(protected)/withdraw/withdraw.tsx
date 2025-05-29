@@ -16,7 +16,7 @@ const Withdraw = () => {
 
   const { data: withdrwData, isLoading: withdrawLoading } =
     useFetchWithdrawPageDataQuery();
-
+  console.log({ cardsData });
   const selectedCard = useCard((state) => state.card);
   return (
     <>
@@ -38,10 +38,9 @@ const Withdraw = () => {
         </>
       )}
 
-      {!cardsData ||
-        !withdrwData ||
-        cardsLoading ||
-        (withdrawLoading && <span>Loading...</span>)}
+      {(!cardsData || !withdrwData || cardsLoading || withdrawLoading) && (
+        <span>Loading...</span>
+      )}
     </>
   );
 };

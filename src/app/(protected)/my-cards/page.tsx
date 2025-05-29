@@ -6,7 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 
 const Card = () => {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden bg-white min-h-screen">
       <SiteHeader title="My Cards">
         <CardCreateIcon />
       </SiteHeader>

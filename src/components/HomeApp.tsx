@@ -5,9 +5,10 @@ import AppMenuItems from "./AppMenuItems";
 import SlotGames from "./SlotsGames";
 import WithdrawDepositButton from "./WithdrawDepositButton";
 import LiveCasino from "./LiveCasino";
-import ESports from "./E-Sports";
-import Sports from "./Sports";
+// import ESports from "./E-Sports";
+// import Sports from "./Sports";
 import GamesProivderMenu from "./GamesProivderMenu";
+import TabNav from "./TabNav";
 // import Jili from "./Jili";
 
 const HomeApp = () => {
@@ -21,9 +22,10 @@ const HomeApp = () => {
       {/* <HotGames /> */}
       {/* <Jili /> */}
       <SlotGames />
-      <ESports />
-      <Sports />
+      {/* <ESports />
+      <Sports /> */}
       <LiveCasino />
+      <TabNav />
     </div>
   );
 };

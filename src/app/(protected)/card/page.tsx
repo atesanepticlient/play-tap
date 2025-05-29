@@ -40,7 +40,7 @@ const CardPage = () => {
 
   const walletName = useSearchParams().get("walletName");
 
-  const { data, isLoading } = useFetchWalletsQuery();
+  const { data, isLoading } = useFetchWalletsQuery({ access: "card" });
   const wallets = data?.paymentWallets;
 
   const { data: containerCheckData, isLoading: containerChecking } =
@@ -156,7 +156,7 @@ const CardPage = () => {
   const isFormSubmiting = cardCreateLoading || cardNewCreateLoading;
 
   return (
-    <div className="">
+    <div className="bg-white min-h-screen">
       <SiteHeader title="Create New Card"></SiteHeader>
 
       <main className="p-3">
