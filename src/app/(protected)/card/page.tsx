@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client";
@@ -17,25 +16,24 @@ import { useFetchWalletsQuery } from "@/lib/features/paymentApiSlice";
 import { cardCreateSchema, newCardCreateSchema } from "@/schema";
 import { FormControl, FormLabel } from "@mui/material";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
 import zod from "zod";
 import { Skeleton } from "@/components/ui/skeleton";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useCreateCardMutation,
-  useNewCreateCardMutation,
-} from "@/lib/features/cardSlice";
+
 import { Prisma } from "@prisma/client";
 import { toast } from "sonner";
-import { INTERNAL_SERVER_ERROR } from "@/error";
 import CardViewModal from "@/components/cards/CardViewModal";
 import { ExtendedCard } from "@/types/api/card";
 import BkashCard from "@/components/cards/BkashCard";
 import NagadCard from "@/components/cards/NagadCard";
+import { createCard, createNewCard } from "@/action/card";
 
 const CardPage = () => {
+  const [pending, startTr] = useTransition();
+
   const [createdCard, setCreateCard] = useState<ExtendedCard>();
 
   const walletName = useSearchParams().get("walletName");
@@ -69,48 +67,37 @@ const CardPage = () => {
     resolver: zodResolver(cardCreateSchema),
   });
 
-  const [createCardApi, { isLoading: cardCreateLoading }] =
-    useCreateCardMutation();
-  const [createNewCardApi, { isLoading: cardNewCreateLoading }] =
-    useNewCreateCardMutation();
-
   const handleCreateNewCard = (data: zod.infer<typeof newCardCreateSchema>) => {
-    createNewCardApi({
-      ownerName: data.payeerName,
-      password: data.password,
-      paymentWalletId: data.paymentWalletId,
-      walletNumber: data.walletNumber,
-    })
-      .unwrap()
-      .then((res) => {
-        setCreateCard(res.card);
-      })
-      .catch((error: any) => {
-        if (error.data.error) {
-          toast.error(error.data.error);
-        } else {
-          toast.error(INTERNAL_SERVER_ERROR);
+    startTr(() => {
+      createNewCard({
+        ownerName: data.payeerName,
+        password: data.password,
+        paymentWalletId: data.paymentWalletId,
+        walletNumber: data.walletNumber,
+      }).then((res) => {
+        if (res.success) {
+          setCreateCard(res.card);
+        } else if (res.error) {
+          toast.error(res.error);
         }
       });
+    });
   };
 
   const handleCreateCard = (data: zod.infer<typeof cardCreateSchema>) => {
-    createCardApi({
-      password: data.password,
-      paymentWalletId: data.paymentWalletId,
-      walletNumber: data.walletNumber,
-    })
-      .unwrap()
-      .then((res) => {
-        setCreateCard(res.card);
-      })
-      .catch((error: any) => {
-        if (error.data.error) {
-          toast.error(error.data.error);
-        } else {
-          toast.error(INTERNAL_SERVER_ERROR);
+    startTr(() => {
+      createCard({
+        password: data.password,
+        paymentWalletId: data.paymentWalletId,
+        walletNumber: data.walletNumber,
+      }).then((res) => {
+        if (res.success) {
+          setCreateCard(res.card);
+        } else if (res.error) {
+          toast.error(res.error);
         }
       });
+    });
   };
 
   useEffect(() => {
@@ -153,7 +140,7 @@ const CardPage = () => {
     }
   }, [wallets, walletName]);
 
-  const isFormSubmiting = cardCreateLoading || cardNewCreateLoading;
+  const isFormSubmiting = pending;
 
   return (
     <div className="bg-white min-h-screen">
