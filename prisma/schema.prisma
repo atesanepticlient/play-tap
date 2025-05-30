@@ -150,9 +150,9 @@ model Card{
   cardNumber              String
   walletNumber            String
   paymentWalletid         String 
-  containerId             String? 
+  containerId             String
   isActive                Boolean @default(true)
-  container               CardContainer? @relation(fields: [containerId], references: [id])
+  container               CardContainer @relation(fields: [containerId], references: [id])
   createdAt               DateTime @default(now())
   withdraws               Withdraw[] 
 }

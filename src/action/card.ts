@@ -45,24 +45,16 @@ export const createCard = async (data: any) => {
 
     const cardNumber = await cardNumberGenerate();
 
-    await db.cardContainer.update({
-      where: {
-        id: cardContainer.id,
-      },
+    const card: any = await db.card.create({
       data: {
-        cards: {
-          create: {
-            walletNumber,
-            paymentWalletid: paymentWalletId,
-            cardNumber,
+        walletNumber,
+        paymentWalletid: paymentWalletId,
+        cardNumber,
+        container: {
+          connect: {
+            id: cardContainer.id,
           },
         },
-      },
-    });
-
-    const card: any = await db.card.findFirst({
-      where: {
-        cardNumber,
       },
       include: {
         container: true,
