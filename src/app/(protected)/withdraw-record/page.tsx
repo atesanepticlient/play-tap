@@ -59,6 +59,11 @@ const DepositRecord = () => {
             ))}
           </div>
         )}
+        {(!data || isLoading) && (
+          <div className="w-full h-screen flex items-center justify-center">
+            <span>Loading...</span>
+          </div>
+        )}
       </div>
     </div>
   );
