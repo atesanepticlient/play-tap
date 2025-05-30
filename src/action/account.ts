@@ -16,7 +16,7 @@ export const updateProfile = async (data: AccountUpdateSchema) => {
 
     const exitingAccount = await db.user.findUnique({ where: { phone } });
 
-    if (exitingAccount) {
+    if (exitingAccount && user.id !== exitingAccount.id) {
       return { error: "Phone was used before" };
     }
 

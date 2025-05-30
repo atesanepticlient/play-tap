@@ -32,15 +32,8 @@ const MyAccount = () => {
   });
 
   const handleUpdate = (data: AccountUpdateSchema) => {
-    if (user!.facebook && data.facebook == user!.facebook) {
-      return 0;
-    }
-    if (user!.name && data.name == user!.name) {
-      return 0;
-    }
-    if (user!.phone && data.phone == user!.phone) {
-      return 0;
-    }
+   
+   
     startTr(() => {
       updateProfile(data).then((res) => {
         if (res.error) {
