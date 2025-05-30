@@ -4,7 +4,7 @@ import Invite from "./invite";
 
 const InviteFriends = () => {
   return (
-    <div className=" h-screen">
+    <div className=" h-screen bg-white">
       <SiteHeader title="Invite Friends" />
       <main className="pb-6 space-y-3">
         <Invite />

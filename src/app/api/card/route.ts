@@ -10,8 +10,6 @@ import { NextRequest } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   try {
-    console.log("CARD CALLED");
-
     const user = await findCurrentUser();
     if (!user)
       return Response.json({ error: "Refresh the page" }, { status: 401 });
@@ -84,10 +82,11 @@ export const POST = async (req: NextRequest) => {
       },
       include: { container: true },
     });
-    console.log("card.paymentWalletId ", card.paymentWalletId);
-    const paymentWallet = await db.paymentWallet.findFirst({
-      where: { id: card.paymentWalletId },
+    console.log({ card });
+    const paymentWallet = await db.paymentWallet.findUnique({
+      where: { id: card.paymentWalletid },
     });
+    console.log({ paymentWallet });
     card.paymentWallet = paymentWallet;
 
     return Response.json(
@@ -102,7 +101,8 @@ export const POST = async (req: NextRequest) => {
 
 export const GET = async (req: NextRequest) => {
   try {
-    const allFind = new URL(req.url).searchParams.get("all") || "true";
+    const allFind =
+      JSON.parse(new URL(req.url).searchParams.get("all")!) || true;
 
     const user = await findCurrentUser();
     if (!user)
@@ -113,12 +113,16 @@ export const GET = async (req: NextRequest) => {
         userId: user.id,
       },
     });
+    if (!cardContainer) {
+      return Response.json({ cards: [] }, { status: 200 });
+    }
 
     const findQuery: Prisma.CardWhereInput = { containerId: cardContainer?.id };
 
-    if (!JSON.parse(allFind)) {
+    if (allFind) {
       findQuery.isActive = true;
     }
+    console.log({ findQuery });
     const cards: any = await db.card.findMany({
       where: findQuery,
       orderBy: { createdAt: "asc" },

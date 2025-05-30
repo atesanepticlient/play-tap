@@ -3,7 +3,7 @@ import React from "react";
 
 const BettingRecord = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-white">
       <NoData />
     </div>
   );

@@ -46,13 +46,6 @@ const App: React.FC = () => {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    setBalance((prevBalance) => {
-      const newBalance = +(prevBalance + (Math.random() * 0.5 - 0.25)).toFixed(
-        2
-      );
-      return newBalance;
-    });
-
     setLastUpdateTime(new Date());
     setShowToast(true);
     setIsRefreshing(false);
@@ -195,7 +188,7 @@ const App: React.FC = () => {
           </Link>
 
           <Link
-            href="/betting-record"
+            href="/bet-reacord"
             className="flex flex-col items-center cursor-pointer"
           >
             <div className="w-12 h-12  rounded-full bg-teal-900/75 border-x-teal-600 flex items-center justify-center  shadow-sm">

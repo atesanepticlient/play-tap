@@ -18,13 +18,13 @@ import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa6";
 import { IoLockOpen } from "react-icons/io5";
 import { login } from "@/action/login";
-import { redirect, useSearchParams } from "next/navigation";
+// import { redirect, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import SpinLoader from "../loader/SpinLoader";
 
 const LoginForm = () => {
   const [pending, startTransiction] = useTransition();
-  const customRedirect = useSearchParams().get("redirect") || "";
+  // const customRedirect = useSearchParams().get("redirect") || "";
 
   const form = useForm<zod.infer<typeof loginSchema>>({
     defaultValues: {
@@ -38,7 +38,7 @@ const LoginForm = () => {
     startTransiction(() => {
       login(data).then((res) => {
         if (res.success) {
-          redirect(customRedirect || "/");
+          location.reload();
         } else if (res.error) {
           toast.error(res.error);
         }
