@@ -339,13 +339,13 @@ const CardPage = () => {
               <BkashCard
                 cardNumber={createdCard!.cardNumber}
                 bkashNumber={createdCard!.walletNumber}
-                ownerName={createdCard!.container.ownerName}
+                ownerName={createdCard?.container?.ownerName || ""}
               />
             ) : (
               <NagadCard
                 cardNumber={createdCard!.cardNumber}
                 nagadNumber={createdCard!.walletNumber}
-                ownerName={createdCard!.container.ownerName}
+                ownerName={createdCard?.container?.ownerName || ""}
               />
             )}
           </CardViewModal>

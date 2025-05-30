@@ -16,21 +16,21 @@ export const createCard = async (data: any) => {
     if (!walletNumber || !paymentWalletId || !password)
       return { error: "Invalid Input" };
 
-    const cardContainer = await db.cardContainer.findFirst({
+    const cardContainer = await db.cardContainer.findUnique({
       where: { userId: user.id },
       include: { cards: true },
     });
 
     if (!cardContainer)
       return { error: "Please create a new Card with Payeer name" };
-
+    console.log("card container founded");
     const existingCardWithNumber = await db.card.findFirst({
       where: { walletNumber },
     });
 
     if (existingCardWithNumber)
       return { error: "Card is avialiable! Try with another Number" };
-
+    console.log("existing card container founded");
     const isPasswordMatch = await bcrypt.compare(
       password,
       cardContainer.password
@@ -45,22 +45,34 @@ export const createCard = async (data: any) => {
 
     const cardNumber = await cardNumberGenerate();
 
-    const card: any = await db.card.create({
+    await db.cardContainer.update({
+      where: {
+        id: cardContainer.id,
+      },
       data: {
-        walletNumber,
-        paymentWalletid: paymentWalletId,
-        cardNumber,
-        container: {
-          connect: {
-            id: cardContainer.id,
+        cards: {
+          create: {
+            walletNumber,
+            paymentWalletid: paymentWalletId,
+            cardNumber,
           },
         },
       },
-      include: { container: true },
     });
+
+    const card: any = await db.card.findFirst({
+      where: {
+        cardNumber,
+      },
+      include: {
+        container: true,
+      },
+    });
+    console.log("card created");
     const paymentWallet = await db.paymentWallet.findUnique({
       where: { id: card.paymentWalletid },
     });
+    console.log("paymentWallet founded");
     card.paymentWallet = paymentWallet;
 
     return { success: true, card: card };
