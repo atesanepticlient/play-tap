@@ -15,7 +15,7 @@ import { useHasCardContainerQuery } from "@/lib/features/depositApiSlice";
 import { useFetchWalletsQuery } from "@/lib/features/paymentApiSlice";
 import { cardCreateSchema, newCardCreateSchema } from "@/schema";
 import { FormControl, FormLabel } from "@mui/material";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import React, { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
@@ -76,7 +76,7 @@ const CardPage = () => {
         walletNumber: data.walletNumber,
       }).then((res) => {
         if (res.success) {
-          setCreateCard(res.card);
+          redirect("/my-cards");
         } else if (res.error) {
           toast.error(res.error);
         }
@@ -92,7 +92,7 @@ const CardPage = () => {
         walletNumber: data.walletNumber,
       }).then((res) => {
         if (res.success) {
-          setCreateCard(res.card);
+          redirect("/my-cards");
         } else if (res.error) {
           toast.error(res.error);
         }
@@ -339,13 +339,13 @@ const CardPage = () => {
               <BkashCard
                 cardNumber={createdCard!.cardNumber}
                 bkashNumber={createdCard!.walletNumber}
-                ownerName={createdCard?.container?.ownerName || ""}
+                ownerName={createdCard?.user?.cardOwnerName || ""}
               />
             ) : (
               <NagadCard
                 cardNumber={createdCard!.cardNumber}
                 nagadNumber={createdCard!.walletNumber}
-                ownerName={createdCard?.container?.ownerName || ""}
+                ownerName={createdCard?.user?.cardOwnerName || ""}
               />
             )}
           </CardViewModal>

@@ -18,13 +18,13 @@ export const { signIn, signOut, auth, handlers } = NextAuth({
     async jwt({ token }) {
       return token;
     },
-    async session({ token, session }: { token : any; session : any}) {
+    async session({ token, session }: { token: any; session: any }) {
       if (token.sub && session.user) {
         const user = await db.user.findUnique({
           where: { id: token.sub },
-          include : {wallet : true}
+          include: { wallet: true },
         });
-        console.log("user from session" , user)
+        console.log("user from session", user);
         if (user?.password) {
           user.password = "";
         }
@@ -36,4 +36,5 @@ export const { signIn, signOut, auth, handlers } = NextAuth({
       return session;
     },
   },
+  trustHost: true,
 });

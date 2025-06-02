@@ -13,12 +13,14 @@ export interface CreateNewCardInput {
   paymentWalletId: string;
 }
 
-export type ExtendedCard = Prisma.CardGetPayload<{ include: { container  : true} }> & {
+export type ExtendedCard = Prisma.CardGetPayload<{
+  include: { user: true };
+}> & {
   paymentWallet: Prisma.PaymentWalletGetPayload<object>;
 };
 
 export interface CardContainerWithCards {
-  cards: Prisma.CardContainerGetPayload<{ include: { cards: true } }>;
+  cards: Prisma.CardGetPayload<{ include: { user: true } }>;
 }
 
 export type CardOutput = Omit<CardContainerWithCards, "cards"> & {

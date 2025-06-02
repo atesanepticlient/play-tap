@@ -6,6 +6,7 @@ import { INTERNAL_SERVER_ERROR } from "@/error";
 import { db } from "@/lib/db";
 import { cardNumberGenerate } from "@/lib/helpers";
 import bcrypt from "bcryptjs";
+
 export const createCard = async (data: any) => {
   try {
     const user = await findCurrentUser();
@@ -16,29 +17,33 @@ export const createCard = async (data: any) => {
     if (!walletNumber || !paymentWalletId || !password)
       return { error: "Invalid Input" };
 
-    const cardContainer = await db.cardContainer.findUnique({
-      where: { userId: user.id },
-      include: { cards: true },
-    });
+    const hasCards = await db.card.findMany({ where: { userId: user.id } });
 
-    if (!cardContainer)
-      return { error: "Please create a new Card with Payeer name" };
-    console.log("card container founded");
+    if (hasCards.length == 0) {
+      return { error: "Please make a card owner first" };
+    }
     const existingCardWithNumber = await db.card.findFirst({
       where: { walletNumber },
     });
 
     if (existingCardWithNumber)
       return { error: "Card is avialiable! Try with another Number" };
-    console.log("existing card container founded");
+
+    const userCardInfo = await db.user.findUnique({
+      where: { id: user!.id },
+      select: { cardOwnerName: true, cardPassword: true },
+    });
+
+    if (!userCardInfo) return { error: "User Not found" };
+
     const isPasswordMatch = await bcrypt.compare(
       password,
-      cardContainer.password
+      userCardInfo.cardPassword!
     );
 
     if (!isPasswordMatch) return { error: "Invalid Password" };
 
-    const limit = cardContainer.cards.length;
+    const limit = hasCards.length;
     if (limit > 4) {
       return { error: "Card limit reached " };
     }
@@ -50,21 +55,16 @@ export const createCard = async (data: any) => {
         walletNumber,
         paymentWalletid: paymentWalletId,
         cardNumber,
-        container: {
+        user: {
           connect: {
-            id: cardContainer.id,
+            id: user.id,
           },
         },
       },
-      include: {
-        container: true,
-      },
     });
-    console.log("card created");
     const paymentWallet = await db.paymentWallet.findUnique({
       where: { id: card.paymentWalletid },
     });
-    console.log("paymentWallet founded");
     card.paymentWallet = paymentWallet;
 
     return { success: true, card: card };
@@ -84,12 +84,11 @@ export const createNewCard = async (data: any) => {
     if (!paymentWalletId || !password || !walletNumber || !ownerName)
       return { error: "Invalid Input" };
 
-    const container = await db.cardContainer.findFirst({
-      where: { userId: user.id },
-    });
+    const hasCards = await db.card.findMany({ where: { userId: user.id } });
 
-    if (container)
-      return { error: "Please Make new card on Existing Container" };
+    if (hasCards.length > 0) {
+      return { error: "You have already a card holder" };
+    }
 
     const existingCardWithNumber = await db.card.findFirst({
       where: { walletNumber },
@@ -100,36 +99,26 @@ export const createNewCard = async (data: any) => {
 
     const hasdPassword = await bcrypt.hash(password, 20);
     const cardNumber = await cardNumberGenerate();
-    const cardContainer = await db.cardContainer.create({
-      data: {
-        ownerName,
-        password: hasdPassword,
-        cards: {
-          create: [
-            {
-              cardNumber,
-              walletNumber,
-              paymentWalletid: paymentWalletId,
+
+    const [card] = await db.$transaction([
+      db.card.create({
+        data: {
+          cardNumber,
+          paymentWalletid: paymentWalletId,
+          walletNumber,
+          user: {
+            connect: {
+              id: user.id,
             },
-          ],
-        },
-        user: {
-          connect: {
-            id: user.id,
           },
         },
-      },
-    });
-
-    const card: any = await db.card.findFirst({
-      where: { containerId: cardContainer.id, walletNumber },
-      include: { container: true },
-    });
-
-    const paymentWallet = await db.paymentWallet.findUnique({
-      where: { id: card.paymentWalletid },
-    });
-    card.paymentWallet = paymentWallet;
+      }),
+      db.user.update({
+        where: { id: user!.id },
+        data: { cardOwnerName: ownerName, cardPassword: hasdPassword },
+      }),
+    ]);
+    console.log("After tr");
     return { success: true, card };
   } catch (error) {
     console.log("careate new card error ", error);

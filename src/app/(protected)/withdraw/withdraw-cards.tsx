@@ -59,13 +59,13 @@ const WithdrawCards = ({ cards }: { cards: ExtendedCard[] }) => {
                 <BkashCard
                   bkashNumber={card.walletNumber}
                   cardNumber={card.cardNumber}
-                  ownerName={card?.container?.ownerName || ""}
+                  ownerName={card?.user?.cardOwnerName || ""}
                 />
               ) : (
                 <NagadCard
                   nagadNumber={card.walletNumber}
                   cardNumber={card.cardNumber}
-                  ownerName={card?.container?.ownerName || ""}
+                  ownerName={card?.user?.cardOwnerName || ""}
                 />
               )}
             </SwiperSlide>

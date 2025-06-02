@@ -2,102 +2,99 @@
 import { findCurrentUser } from "@/data/user";
 import { INTERNAL_SERVER_ERROR } from "@/error";
 import { db } from "@/lib/db";
-import { cardNumberGenerate } from "@/lib/helpers";
-import { CreateCardInput } from "@/types/api/card";
 import { Prisma } from "@prisma/client";
-import bcrypt from "bcryptjs";
 import { NextRequest } from "next/server";
 
-export const POST = async (req: NextRequest) => {
-  try {
-    const user = await findCurrentUser();
-    if (!user)
-      return Response.json({ error: "Refresh the page" }, { status: 401 });
+// export const POST = async (req: NextRequest) => {
+//   try {
+//     const user = await findCurrentUser();
+//     if (!user)
+//       return Response.json({ error: "Refresh the page" }, { status: 401 });
 
-    const { walletNumber, paymentWalletId, password } =
-      (await req.json()) as CreateCardInput;
+//     const { walletNumber, paymentWalletId, password } =
+//       (await req.json()) as CreateCardInput;
 
-    if (!walletNumber || !paymentWalletId || !password)
-      return Response.json(
-        {
-          error: "Invalid Input",
-        },
-        { status: 400 }
-      );
-    const cardContainer = await db.cardContainer.findFirst({
-      where: { userId: user.id },
-      include: { cards: true },
-    });
+//     if (!walletNumber || !paymentWalletId || !password)
+//       return Response.json(
+//         {
+//           error: "Invalid Input",
+//         },
+//         { status: 400 }
+//       );
+//     const cardContainer = await db.cardContainer.findFirst({
+//       where: { userId: user.id },
+//       include: { cards: true },
+//     });
 
-    if (!cardContainer)
-      return Response.json(
-        {
-          error: "Please create a new Card with Payeer name",
-        },
-        { status: 400 }
-      );
+//     if (!cardContainer)
+//       return Response.json(
+//         {
+//           error: "Please create a new Card with Payeer name",
+//         },
+//         { status: 400 }
+//       );
 
-    const existingCardWithNumber = await db.card.findFirst({
-      where: { walletNumber },
-    });
+//     const existingCardWithNumber = await db.card.findFirst({
+//       where: { walletNumber },
+//     });
 
-    if (existingCardWithNumber)
-      return Response.json(
-        {
-          error: "Card is avialiable! Try with another Number",
-        },
-        { status: 400 }
-      );
+//     if (existingCardWithNumber)
+//       return Response.json(
+//         {
+//           error: "Card is avialiable! Try with another Number",
+//         },
+//         { status: 400 }
+//       );
 
-    const isPasswordMatch = await bcrypt.compare(
-      password,
-      cardContainer.password
-    );
+//     const isPasswordMatch = await bcrypt.compare(
+//       password,
+//       cardContainer.password
+//     );
 
-    if (!isPasswordMatch)
-      return Response.json(
-        {
-          error: "Invalid Password",
-        },
-        { status: 400 }
-      );
+//     if (!isPasswordMatch)
+//       return Response.json(
+//         {
+//           error: "Invalid Password",
+//         },
+//         { status: 400 }
+//       );
 
-    const limit = cardContainer.cards.length;
-    if (limit > 4) {
-      return Response.json({ error: "Card limit reached " }, { status: 400 });
-    }
+//     const limit = cardContainer.cards.length;
+//     if (limit > 4) {
+//       return Response.json({ error: "Card limit reached " }, { status: 400 });
+//     }
 
-    const cardNumber = await cardNumberGenerate();
+//     const cardNumber = await cardNumberGenerate();
 
-    const card: any = await db.card.create({
-      data: {
-        walletNumber,
-        paymentWalletid: paymentWalletId,
-        cardNumber,
-        container: {
-          connect: {
-            id: cardContainer.id,
-          },
-        },
-      },
-      include: { container: true },
-    });
-    console.log({ card });
-    const paymentWallet = await db.paymentWallet.findUnique({
-      where: { id: card.paymentWalletid },
-    });
-    console.log({ paymentWallet });
-    card.paymentWallet = paymentWallet;
+//     const card: any = await db.card.create({
+//       data: {
+//         walletNumber,
+//         paymentWalletid: paymentWalletId,
+//         cardNumber,
+//         container: {
+//           connect: {
+//             id: cardContainer.id,
+//           },
+//         },
+//       },
+//       include: { container: true },
+//     });
+//     console.log({ card });
+//     const paymentWallet = await db.paymentWallet.findUnique({
+//       where: { id: card.paymentWalletid },
+//     });
+//     console.log({ paymentWallet });
+//     card.paymentWallet = paymentWallet;
 
-    return Response.json(
-      { message: "New card created", card: card },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.log("CREATE CARD ERROR ", error);
-    return Response.json({ error: INTERNAL_SERVER_ERROR }, { status: 500 });
-  }
-};
+//     return Response.json(
+//       { message: "New card created", card: card },
+//       { status: 201 }
+//     );
+//   } catch (error) {
+//     console.log("CREATE CARD ERROR ", error);
+//     return Response.json({ error: INTERNAL_SERVER_ERROR }, { status: 500 });
+//   }
+// };
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -108,25 +105,16 @@ export const GET = async (req: NextRequest) => {
     if (!user)
       return Response.json({ error: "Refresh the page" }, { status: 401 });
 
-    const cardContainer = await db.cardContainer.findFirst({
-      where: {
-        userId: user.id,
-      },
-    });
-    if (!cardContainer) {
-      return Response.json({ cards: [] }, { status: 200 });
-    }
-
-    const findQuery: Prisma.CardWhereInput = { containerId: cardContainer?.id };
+    const findQuery: Prisma.CardWhereInput = { userId: user.id };
 
     if (allFind) {
       findQuery.isActive = true;
     }
-    console.log({ findQuery });
+
     const cards: any = await db.card.findMany({
       where: findQuery,
       orderBy: { createdAt: "asc" },
-      include: { container: true },
+      include: { user: true },
     });
 
     const cardsWithWalletPromise = cards.map(async (card: any) => {

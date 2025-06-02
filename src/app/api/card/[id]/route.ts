@@ -9,7 +9,7 @@ export const PUT = async (
 ) => {
   try {
     const user = await findCurrentUser();
-    console.log("USER ", user)
+    console.log("USER ", user);
     if (!user)
       return Response.json({ error: "Refresh the page" }, { status: 401 });
 
@@ -18,15 +18,11 @@ export const PUT = async (
 
     const card = await db.card.findFirst({
       where: { id },
-      include: { container: true },
     });
     if (!card)
       return Response.json({ error: "Card Not Found" }, { status: 404 });
 
-    console.log("Container owner ", card.container.userId);
-    console.log("User Id ", user.id);
-
-    if (card.container.userId !== user.id)
+    if (card.userId !== user.id)
       return Response.json(
         { error: "You have no Permission to update this card" },
         { status: 403 }

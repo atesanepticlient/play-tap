@@ -8,11 +8,14 @@ export const GET = async () => {
     if (!user)
       return Response.json({ error: "Refresh the page" }, { status: 401 });
 
-    const hasCardContainer = !!(await db.cardContainer.findFirst({
-      where: { userId: user.id },
-    }));
+    const cardPassword = (
+      await db.user.findUnique({
+        where: { id: user!.id },
+        select: { cardPassword: true },
+      })
+    )?.cardPassword;
 
-    return Response.json({ hasCardContainer }, { status: 200 });
+    return Response.json({ hasCardContainer: !!cardPassword }, { status: 200 });
   } catch (error) {
     console.log("CARD FETCH ERROR : ", error);
     return Response.json({ error: INTERNAL_SERVER_ERROR }, { status: 500 });

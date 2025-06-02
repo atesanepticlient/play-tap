@@ -42,11 +42,11 @@ export const POST = async (req: NextRequest) => {
       return Response.json({ error: "Insufficient balance" }, { status: 404 });
     }
 
-    const cardContainer = await db.cardContainer.findFirst({
+    const cars = await db.card.findMany({
       where: { userId: user!.id },
     });
 
-    if (!cardContainer)
+    if (cars.length == 0)
       return Response.json({ error: "Please create a card first" });
 
     const card = await db.card.findFirst({
@@ -57,10 +57,14 @@ export const POST = async (req: NextRequest) => {
       return Response.json({ error: "Try with another card" }, { status: 400 });
     }
 
-    const passwordMatched = await bcrypt.compare(
-      password,
-      cardContainer.password
-    );
+    const cardPassword = (
+      await db.user.findUnique({
+        where: { id: user!.id },
+        select: { cardPassword: true },
+      })
+    )?.cardPassword;
+
+    const passwordMatched = await bcrypt.compare(password, cardPassword!);
 
     if (!passwordMatched)
       return Response.json(

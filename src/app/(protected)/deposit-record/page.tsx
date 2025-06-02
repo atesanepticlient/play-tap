@@ -9,7 +9,6 @@ const DepositRecord = () => {
   const { data, isLoading } = useFetchDepositsRecordsQuery();
 
   const deposits = data?.deposits;
-  console.log({ deposits });
   return (
     <div className="min-h-screen bg-white">
       <SiteHeader title="Deposits Records" />

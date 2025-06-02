@@ -28,7 +28,9 @@ model User{
   wallet            Wallet?
   deposit           Deposit[]
   createdAt         DateTime @default(now())
-  cardContainer     CardContainer?
+  cards             Card[]
+  cardOwnerName     String?
+  cardPassword      String?
   withdraws         Withdraw[]
   inviationBonus    InvitationBonus?
   invitedById       String?
@@ -135,24 +137,24 @@ model Deposit {
 
 
 
-model CardContainer{
-  id                      String @id @default(cuid()) 
-  ownerName               String
-  password                String
-  userId                  String @unique
-  user                    User @relation(fields: [userId], references: [id])
-  createdAt               DateTime @default(now())
-  cards                   Card[]
-}
+// model CardContainer{
+//   id                      String @id @default(cuid()) 
+//   ownerName               String
+//   password                String
+//   userId                  String @unique
+//   user                    User @relation(fields: [userId], references: [id])
+//   createdAt               DateTime @default(now())
+//   cards                   Card[]
+// }
 
 model Card{
   id                      String @id @default(cuid()) 
   cardNumber              String
   walletNumber            String
   paymentWalletid         String 
-  containerId             String
   isActive                Boolean @default(true)
-  container               CardContainer @relation(fields: [containerId], references: [id])
+  userId                  String
+  user                    User @relation(fields: [userId], references: [id])
   createdAt               DateTime @default(now())
   withdraws               Withdraw[] 
 }

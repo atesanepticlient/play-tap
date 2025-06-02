@@ -3,9 +3,12 @@ import { authRoutes, publicRoutes, providerApiPrefix } from "./routes";
 import authConfig from "./auth.config";
 
 const { auth } = NextAuth({ ...authConfig });
+
 export default auth(async (req) => {
   const { nextUrl } = req;
   const session = !!req.auth;
+  console.log("session form middleware  ", session);
+  console.log("auth ", req.auth);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isProvider = nextUrl.pathname.startsWith(providerApiPrefix);
@@ -19,6 +22,8 @@ export default auth(async (req) => {
     return Response.redirect(new URL(`/login`, nextUrl));
   }
 });
+
+
 
 export const config = {
   matcher: [
